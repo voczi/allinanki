@@ -88,7 +88,7 @@ HRESULT createShortcut(LPCWSTR targetPath, LPCWSTR shortcutPath, LPCWSTR working
 
 int printUsage()
 {
-    printf_s("Usage: create-shortcut.exe target_path shortcut_path working_directory appusermodel_id");
+    printf_s("Usage: create-shortcut.exe target_path shortcut_path working_directory appusermodel_id\n");
     return 1;
 }
 
@@ -110,10 +110,10 @@ int wmain(int argc, wchar_t *argv[])
     {
         _com_error comError(hres);
         LPCWSTR errorMessage = comError.ErrorMessage();
-        wprintf_s(L"%s (0x%08lx)", errorMessage, hres);
+        wprintf_s(L"%s (0x%08lx)\n", errorMessage, hres);
         return hres;
     }
 
-    wprintf_s(L"Successfully created a shortcut at: %s", shortcutPath);
+    wprintf_s(L"Successfully created a shortcut at: %s\n", shortcutPath);
     return 0;
 }
