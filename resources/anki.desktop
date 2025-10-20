@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Anki
+Comment=Flashcard memorization program
+Path=INSTALL_DIR
+Exec=Anki %f
+Icon=ICON_PATH
+Terminal=false
+Categories=Education;Languages;Qt;
+MimeType=application/x-apkg;application/x-colpkg;application/x-ankiaddon;
+SingleMainWindow=true

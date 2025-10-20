@@ -1,0 +1,42 @@
+name: build-macos-arm64
+run-name: Building All in Anki for Anki ${{ inputs.version }} on MacOS arm64
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: Anki release version
+        required: true
+
+jobs:
+  build-package:
+    runs-on: macos-14
+    env:
+      output_name: "allinanki-${{ inputs.version }}-macos-arm64"
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.10"
+          cache: "pip"
+      - name: "Install prerequisities"
+        run: python -m pip install -r requirements.txt anki-release==${{ inputs.version }}
+      - name: "Patch aqt module"
+        run: python patches/patch_aqt.py
+      - name: "Build package"
+        run: pyinstaller --onedir --hidden-import anki --hidden-import aqt --collect-all _aqt --collect-all anki_mac_helper --collect-all anki_audio --argv-emulation --noconfirm --noconsole --icon resources/anki.icns --name Anki allinanki.py
+      - name: "Patch Info.plist"
+        run: python patches/patch_plist.py
+      - name: "Include extra files"
+        run: |
+          cp README.md LICENSE dist/Anki.app
+      - name: "Compress output"
+        run: "tar -czf dist/${{ env.output_name }}.tar.gz -C dist/ Anki.app/"
+      - name: "Upload artifact"
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ env.output_name }}"
+          path: "dist/${{ env.output_name }}.tar.gz"
+          compression-level: 0
+          if-no-files-found: error

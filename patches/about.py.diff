@@ -1,0 +1,12 @@
+diff --git a/about.py b/about.py
+index 95e0340..428b7ba 100644
+--- a/about.py
++++ b/about.py
+@@ -79,6 +79,7 @@ def show(mw: aqt.AnkiQt) -> QDialog:
+         without_unicode_isolation(tr.about_visit_website(val=aqt.appWebsite))
+         + "</span>"
+     )
++    abouttext += "<br>All in Anki by voczi (https://github.com/voczi/allinanki)<br>"
+ 
+     # Automatically sorted; add new lines at the end.
+     # This is a list of users who want to appear in the dialog, and includes people who have

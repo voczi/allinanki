@@ -1,0 +1,50 @@
+name: build-windows-x86_64
+run-name: Building All in Anki for Anki ${{ inputs.version }} on Windows x86_64
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: Anki release version
+        required: true
+
+jobs:
+  build-package:
+    runs-on: windows-latest
+    env:
+      output_name: "allinanki-${{ inputs.version }}-windows-x86_64"
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.10"
+          cache: "pip"
+      - name: "Install prerequisities"
+        run: python.exe -m pip install -r requirements.txt anki-release==${{ inputs.version }}
+      - name: "Patch aqt module"
+        run: python patches/patch_aqt.py
+      - name: "Build package"
+        run: pyinstaller --onedir --hidden-import anki --hidden-import aqt --collect-all _aqt --collect-all anki_audio --noconfirm --noconsole --noupx --icon resources/anki.ico --name Anki allinanki.py
+      - uses: ilammy/msvc-dev-cmd@0b201ec74fa43914dc39ae48a89fd1d8cb592756 # v1.13.0
+      - name: "Build shortcut creator"
+        run: cl /EHsc /MT scripts\create-shortcut.cpp
+      - name: "Finalize package"
+        run: |
+          copy README.md dist\Anki
+          copy LICENSE dist\Anki
+          copy scripts\install.bat dist\Anki
+          mkdir dist\Anki\scripts
+          copy scripts\Install.ps1 dist\Anki\scripts
+          copy scripts\uninstall.bat dist\Anki\scripts
+          copy scripts\Uninstall.ps1 dist\Anki\scripts
+          copy create-shortcut.exe dist\Anki\scripts
+      - name: "Compress output"
+        run: "tar -czf dist/${{ env.output_name }}.tar.gz -C dist Anki"
+      - name: "Upload artifact"
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ env.output_name }}"
+          path: "dist/${{ env.output_name }}.tar.gz"
+          compression-level: 0
+          if-no-files-found: error

@@ -1,0 +1,12 @@
+diff --git a/utils.py b/utils.py
+index 43efc51..4956af1 100644
+--- a/utils.py
++++ b/utils.py
+@@ -1242,6 +1242,7 @@ def supportText() -> str:
+ Anki {} {}
+ Python {} Qt {} PyQt {}
+ Platform: {}
++All in Anki by voczi (https://github.com/voczi/allinanki)
+ """.format(
+         version_with_build(),
+         "(ao)" if mw.addonManager.dirty else "",
