@@ -5,7 +5,7 @@ from os import path
 
 
 def main():
-    log_path = path.join(tempfile.gettempdir(), "allinanki_log.log")
+    log_path = path.join(tempfile.gettempdir(), "allinanki.log")
     with open(log_path, "w") as sys.stdout:
         sys.stderr = sys.stdout
 

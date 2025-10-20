@@ -10,7 +10,9 @@ With the above in mind, the purpose of this project is to distribute Anki in an 
 
 ## Bug reports
 
-If you encounter a bug and you believe that it is related to this project, then please [open an issue](https://github.com/voczi/anki_aio/issues/new/choose) here on this repo. However, if you also experience this issue using an [official distribution of Anki](https://apps.ankiweb.net/) then report the bug on [the Anki forums](https://forums.ankiweb.net/). In most cases, if you experience a bug before barely having seen the actual window of the Anki app, you can assume that the bug is to be reported here.
+If you encounter a bug and you believe that it is related to this project, then please [open an issue](https://github.com/voczi/anki_aio/issues/new/choose) here on this repository. However, if you also experience this issue using an [official distribution of Anki](https://apps.ankiweb.net/) then report the bug on [the Anki forums](https://forums.ankiweb.net/). In most cases, if you experience a bug before barely having seen the actual window of the Anki app, you can assume that the bug is to be reported here.
+
+When you submit a bug report on this repository, make sure that you include the debug info that you can copy from the error windows that pops up in Anki. If such a window did not show up, then please copy the contents of the log file `allinanki.log` instead. This file can be found inside of your computer's temporary directory (`%TEMP%` on Windows, `$TMPDIR` on macOS, `/tmp` on Linux).
 
 ## Original authors
 
