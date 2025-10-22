@@ -39,14 +39,17 @@ if ($reply -ne "Y") {
     Write-Error "Installation cancelled."
 }
 
+if (Test-Path -Path $install_dir) {
+    Remove-Item -Recurse -Force $install_dir
+}
+
 Write-Host "Installing Anki.."
-Remove-Item -Recurse -Force $install_dir -ErrorAction SilentlyContinue
 New-Item -Path $install_dir -ItemType "Directory" -Force > $null
 Copy-Item -Path * -Destination $install_dir -Recurse
 Remove-Item -Path "$install_dir\install.bat", "$install_dir\scripts\Install.ps1"
 
 $shortcut_creator_path = "$install_dir\scripts\create-shortcut.exe"
-& $shortcut_creator_path $exe_path $shortcut_path $install_dir "Ankitects.Anki"
+& $shortcut_creator_path $exe_path $shortcut_path $install_dir "Ankitects.Anki" > $null
 if ($LASTEXITCODE -ne 0) {
     Write-Error "Installation of Anki failed."
 }
