@@ -40,7 +40,9 @@ jobs:
           copy scripts\Uninstall.ps1 dist\Anki\scripts
           copy create-shortcut.exe dist\Anki\scripts
       - name: "Compress output"
-        run: "tar -czf dist/${{ env.output_name }}.tar.gz -C dist Anki"
+        run: |
+          tar -czf dist/${{ env.output_name }}.tar.gz -C dist Anki
+          Get-FileHash -Path dist/${{ env.output_name }}.tar.gz -Algorithm SHA256
       - name: "Upload artifact"
         uses: actions/upload-artifact@v4
         with:
