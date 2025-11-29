@@ -15,7 +15,7 @@ jobs:
     env:
       output_name: "allinanki-${{ inputs.version }}-linux-x86_64"
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: awalsh128/cache-apt-pkgs-action@acb598e5ddbc6f68a970c5da0688d2f3a9f04d05 # v1.6.0
         with:
           packages: |
