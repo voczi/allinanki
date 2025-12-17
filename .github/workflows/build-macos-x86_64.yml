@@ -36,7 +36,7 @@ jobs:
           tar -czf dist/${{ env.output_name }}.tar.gz -C dist/ Anki.app/
           shasum -a 256 dist/${{ env.output_name }}.tar.gz
       - name: "Upload artifact"
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: "${{ env.output_name }}"
           path: "dist/${{ env.output_name }}.tar.gz"
