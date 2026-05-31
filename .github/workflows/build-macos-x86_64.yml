@@ -11,7 +11,7 @@ on:
 
 jobs:
   build-package:
-    runs-on: macos-13
+    runs-on: macos-15-intel
     env:
       output_name: "allinanki-${{ inputs.version }}-macos-x86_64"
     steps:
