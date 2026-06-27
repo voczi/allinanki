@@ -1,3 +1,7 @@
+# Note 2026-06-27
+
+Anki is now packaged with an offline installer starting with [version 26.05](https://github.com/ankitects/anki/releases/tag/26.05). No need for further releases on this repository anymore! But I will keep the packages of older releases in case someone needs them in the future. :)
+
 # All in Anki
 
 Community-driven, all-in-one distributions for the flashcard app [Anki](https://apps.ankiweb.net/).
